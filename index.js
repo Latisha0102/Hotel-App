@@ -77,7 +77,7 @@ try{
   }
  app.get("/hotels/:hotelId",async(req,res) =>{
   try{
-    const hotelId = await deleteHotel(req.params.id)
+    const hotelId = await deleteHotel(req.params.hotelId)
     if(hotelId){
       res.status(200).json({message:"Hotel deleted successfully" ,hotel: hotelId})
     }else{
