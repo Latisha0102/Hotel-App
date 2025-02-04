@@ -66,7 +66,51 @@ if(allHotels.length != 0){
     }
   })
 
+  async function addHotel(newHotel){
+    try{
+      const hotel = new Hotel(newHotel)
+      const saveHotel = await hotel.save()
+      return saveHotel
 
+    }catch(error){
+      console.log(error)
+    }
+ 
+
+  }
+app.post("/hotels" , async(req,res) =>{
+ try{
+  const hotel = await addHotel(req.body)
+  res.status(201).json({message: "Hotel Added Successfully" , Hotel: hotel})
+ }catch(error){
+  res.status(500).json({error: "Failed to add movie"})
+ }
+
+})
+
+
+async function getHotelByName(hotelName){
+  try{
+    const hotel = await Hotel.findOne({name: hotelName})
+    return hotel
+  }catch(error){
+    console.log(error)
+  }
+}
+
+app.get("/hotels/name/:hotelName", async (req,res)=>{
+  try{
+    const hotel = await getHotelByName(req.params.hotelName)
+    if(hotel){
+      res.json(hotel)
+      res.status(200).json({message: "Hotel found by name" , hotel: hotel})
+    }else{
+      res.status(400).json({message: "Hotel not found"})
+    }
+  }catch(error){
+    res.status(500).json({message: "Error in fetching hotels"})
+  }
+})
   async function deleteHotel(hotelId){
 try{
   const deletedHotel = await Hotel.findByIdAndDelete(hotelId)
