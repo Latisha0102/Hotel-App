@@ -81,6 +81,7 @@ if(allHotels.length != 0){
 app.post("/hotels" , async(req,res) =>{
  try{
   const hotel = await addHotel(req.body)
+  res.json(hotel)``
   res.status(201).json({message: "Hotel Added Successfully" , Hotel: hotel})
  }catch(error){
   res.status(500).json({error: "Failed to add movie"})
@@ -132,7 +133,7 @@ try{
   }
  })
 
-  const PORT = 3002
+  const PORT = 3003
 
   app.listen(PORT , () => {
     console.log("Server is running on ",PORT)
