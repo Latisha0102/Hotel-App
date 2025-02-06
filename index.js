@@ -12,7 +12,7 @@ const Hotel = require("./models/hotel.models")
 const app = express()
 app.use(express.json())
 app.use(cors(corsOption))
-// const newHotel = {
+// // const newHotel = {
 //     name: "New Hotel",
 //     category: "Mid-Range",
 //     location: "123 Main Street, Frazer Town",
@@ -81,7 +81,7 @@ if(allHotels.length != 0){
 app.post("/hotels" , async(req,res) =>{
  try{
   const hotel = await addHotel(req.body)
-  res.json(hotel)``
+  //res.json(hotel)
   res.status(201).json({message: "Hotel Added Successfully" , Hotel: hotel})
  }catch(error){
   res.status(500).json({error: "Failed to add movie"})
@@ -120,7 +120,7 @@ try{
   console.log(error)
 }
   }
- app.get("/hotels/:hotelId",async(req,res) =>{
+ app.delete("/hotels/:hotelId",async(req,res) =>{
   try{
     const hotelId = await deleteHotel(req.params.hotelId)
     if(hotelId){
